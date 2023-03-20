@@ -1,9 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:portfolio/assets.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,19 +18,20 @@ void main() {
   runApp(const MyApp());
 }
 
+var images = [
+  Assets.logo.flutterSVG,
+  Assets.logo.firebaseSVG,
+  Assets.logo.figmaSVG,
+  Assets.logo.androidSVG,
+  Assets.logo.nodejsSVG,
+  Assets.logo.webSolutionSVG,
+];
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final materialTheme = ThemeData(
-      brightness: Brightness.dark,
-      cupertinoOverrideTheme: const CupertinoThemeData(
-        primaryColor: Colors.black,
-        scaffoldBackgroundColor: Color(0xff11111),
-      ),
-    );
-
     return PlatformProvider(
       settings: PlatformSettingsData(
         iosUsesMaterialWidgets: true,
@@ -40,104 +45,173 @@ class MyApp extends StatelessWidget {
         ],
         title: 'Flutter Platform Widgets',
         home: const HomePage(),
-        material: (_, __) => MaterialAppData(
-          theme: ThemeData(scaffoldBackgroundColor: Colors.black),
-        ),
-        cupertino: (_, __) => CupertinoAppData(
-          theme: const CupertinoThemeData(
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: Color(0xff11111),
-            primaryColor: Colors.black,
-          ),
-        ),
+        material: (_, __) => MaterialAppData(),
+        cupertino: (_, __) => CupertinoAppData(),
       ),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     var deviceType = getDeviceType(MediaQuery.of(context).size);
     return PlatformScaffold(
+      backgroundColor: Colors.white,
       body: ResponsiveBuilder(builder: (context, size) {
         return DefaultTextStyle(
-          style: TextStyle(fontFamily: GoogleFonts.raleway().fontFamily),
+          style: TextStyle(
+              fontFamily: GoogleFonts.raleway().fontFamily,
+              color: Colors.black),
 
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                elevation: 20,
-                pinned: true,
-                leading: const FlutterLogo().animate().slide(),
-                centerTitle: false,
-                title: const Text("Udesh Sharma").animate().slide(),
-                backgroundColor: Colors.black12,
-                actions: [
-                  size.isMobile
-                      ? Icon(Icons.menu)
-                      : Row(
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: Text("Home").animate().slide(),
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text("Home").animate().slide(),
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text("Home").animate().slide(),
-                            ),
-                          ],
-                        )
-                ],
-              ),
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: size.screenSize.height * 0.2,
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                AppBar(
+                  elevation: 00,
+                  leading: const FlutterLogo().animate().slide(),
+                  centerTitle: false,
+                  title: const Text("Udesh Sharma").animate().slide(),
+                  backgroundColor: Colors.transparent,
+                  actions: [
+                    size.isMobile
+                        ? Icon(
+                            Icons.menu,
+                            color: Colors.black,
+                          )
+                        : Row(
+                            children: [
+                              TextButton(
+                                onPressed: () {},
+                                child: Text("Home").animate().slide(),
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text("Home").animate().slide(),
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text("Home").animate().slide(),
+                              ),
+                            ],
+                          ),
+                  ],
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: SelectableText(
-                  "We specialize in crafting exceptional \ndigital experiences to help our \nclients achieve their business goals.",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ).animate().slide(),
-              ),
-              SliverToBoxAdapter(
-                child: SizedBox(
+
+                SizedBox(
                   height: size.screenSize.height * 0.1,
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: SelectableText(
-                  "Moblie App Design",
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.w700),
-                ).animate().slide(),
-              ),
-              SliverPadding(
-                padding: EdgeInsets.all(size.screenSize.width * 0.1),
-                sliver: SliverGrid.builder(
-                  itemCount: 4,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: size.isMobile ? 1 : 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: size.screenSize.width * 0.6,
+                    minWidth: size.screenSize.width * 0.4,
                   ),
-                  itemBuilder: (context, index) {
-                    return ItemWidget();
-                  },
+                  width: 500,
+                  child: Text(
+                    "Udesh Sharma \nFlutter Developer\n Based in India",
+                    style: Theme.of(context).textTheme.headlineLarge,
+                    textAlign: TextAlign.center,
+                  ).animate().fadeIn(),
                 ),
-              )
-            ],
+
+                Placeholder(
+                  fallbackHeight: size.screenSize.height * 0.7,
+                  fallbackWidth: 400,
+                ).animate().fadeIn(),
+
+                Divider(),
+                SizedBox(
+                  height: size.screenSize.height * 0.1,
+                ),
+
+                SelectableText(
+                  "My Advantages",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                )
+                    .animate(
+                        // delay: 400.ms,
+                        )
+                    .fadeIn()
+                    .slide(),
+
+                Wrap(
+                  children: images.map((e) {
+                    return ItemWidget(
+                      path: e,
+                    );
+                  }).toList(),
+                ),
+
+                // SliverPadding(
+                //   padding: EdgeInsets.only(left: size.screenSize.width * 0.1),
+                //   sliver: SliverToBoxAdapter(
+                //     child: SizedBox(
+                //       height: size.screenSize.height * 0.1,
+                //     ),
+                //   ),
+                // ),
+                // SliverPadding(
+                //   padding: EdgeInsets.symmetric(
+                //       horizontal: size.screenSize.width * 0.1),
+                //   sliver: SliverToBoxAdapter(
+                //     child: SelectableText(
+                //       "We specialize in crafting exceptional \ndigital experiences to help our \nclients achieve their business goals.",
+                //       style: TextStyle(
+                //         fontSize: 25,
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.white,
+                //       ),
+                //     ).animate().slide(),
+                //   ),
+                // ),
+                // SliverToBoxAdapter(
+                //   child: SizedBox(
+                //     height: size.screenSize.height * 0.1,
+                //   ),
+                // ),
+                // SliverPadding(
+                //   padding: EdgeInsets.symmetric(
+                //       horizontal: size.screenSize.width * 0.1),
+                //   sliver: SliverToBoxAdapter(
+                //     child: SelectableText(
+                //       "Moblie App Design",
+                //       style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                //           color: Colors.white, fontWeight: FontWeight.w700),
+                //     ).animate().slide(),
+                //   ),
+                // ),
+                // SliverToBoxAdapter(
+                //   child: SizedBox(
+                //     height: size.screenSize.height * 0.05,
+                //   ),
+                // ),
+                // SliverPadding(
+                //   padding: EdgeInsets.symmetric(
+                //       horizontal: size.screenSize.width * 0.1),
+                //   sliver: SliverGrid.builder(
+                //     itemCount: 4,
+                //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //       crossAxisCount: size.isMobile ? 1 : 2,
+                //       crossAxisSpacing: 20,
+                //       mainAxisSpacing: 20,
+                //     ),
+                //     itemBuilder: (context, index) {
+                //       return const ItemWidget();
+                //     },
+                //   ),
+                // )
+              ],
+            ),
           ),
           // child: Center(
           //   child: Column(
@@ -269,17 +343,59 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class ItemWidget extends StatelessWidget {
+class ItemWidget extends StatefulWidget {
   const ItemWidget({
-    super.key,
-  });
+    Key? key,
+    required this.path,
+  }) : super(key: key);
+
+  final String path;
+  @override
+  State<ItemWidget> createState() => _ItemWidgetState();
+}
+
+class _ItemWidgetState extends State<ItemWidget> {
+  bool isHover = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.purple,
-      child: FlutterLogo(),
-      height: 200,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (event) {
+        // setState(() {
+        //   isHover = true;
+        // });
+      },
+      onExit: (event) => setState(() {
+        isHover = false;
+      }),
+      onHover: (event) {
+        setState(() {
+          isHover = true;
+        });
+      },
+      child: Center(
+        child: CircleAvatar(
+            backgroundColor: Colors.grey.withOpacity(0.3),
+            radius: 100,
+            child: SvgPicture.asset(
+              widget.path,
+              fit: BoxFit.cover,
+              height: 100,
+              width: 100,
+              colorFilter: isHover
+                  ? null
+                  : ColorFilter.mode(Colors.transparent, BlendMode.saturation),
+            ).animate(
+              onPlay: (controller) {
+                if (isHover) {
+                  controller.repeat();
+                } else {
+                  controller.stop();
+                }
+              },
+            ).shake()),
+      ).animate().slide(),
     );
   }
 }
