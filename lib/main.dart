@@ -69,10 +69,12 @@ class HomePage extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
+                elevation: 20,
+                pinned: true,
                 leading: const FlutterLogo().animate().slide(),
                 centerTitle: false,
-                title: Text("Udesh Sharma").animate().slide(),
-                backgroundColor: Colors.black,
+                title: const Text("Udesh Sharma").animate().slide(),
+                backgroundColor: Colors.black12,
                 actions: [
                   size.isMobile
                       ? Icon(Icons.menu)
@@ -94,6 +96,47 @@ class HomePage extends StatelessWidget {
                         )
                 ],
               ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: size.screenSize.height * 0.2,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SelectableText(
+                  "We specialize in crafting exceptional \ndigital experiences to help our \nclients achieve their business goals.",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ).animate().slide(),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: size.screenSize.height * 0.1,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SelectableText(
+                  "Moblie App Design",
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.w700),
+                ).animate().slide(),
+              ),
+              SliverPadding(
+                padding: EdgeInsets.all(size.screenSize.width * 0.1),
+                sliver: SliverGrid.builder(
+                  itemCount: 4,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: size.isMobile ? 1 : 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                  ),
+                  itemBuilder: (context, index) {
+                    return ItemWidget();
+                  },
+                ),
+              )
             ],
           ),
           // child: Center(
@@ -222,6 +265,21 @@ class HomePage extends StatelessWidget {
           // ),
         );
       }),
+    );
+  }
+}
+
+class ItemWidget extends StatelessWidget {
+  const ItemWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.purple,
+      child: FlutterLogo(),
+      height: 200,
     );
   }
 }
