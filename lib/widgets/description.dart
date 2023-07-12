@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/utils/custom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class Description extends StatelessWidget {
   final bool isVertical;
   final double width;
-  const Description(
-      {required this.isVertical, required this.width, Key? key})
+  const Description({required this.isVertical, required this.width, Key? key})
       : super(key: key);
 
   @override
@@ -20,23 +21,32 @@ class Description extends StatelessWidget {
             isVertical ? CrossAxisAlignment.center : CrossAxisAlignment.start,
         children: [
           Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              width: 135,
-              height: 40,
-              alignment: Alignment.center,
-              color: CustomColors.primary,
-              child: Center(
-                  child: Text('Software Engineer',
-                      style: GoogleFonts.getFont('Days One',
-                          color: Colors.black, fontSize: 10)))),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  width: 135,
+                  height: 40,
+                  alignment: Alignment.center,
+                  color: CustomColors.primary,
+                  child: Center(
+                      child: Text('Software Developer',
+                          style: GoogleFonts.getFont('Days One',
+                              color: Colors.black, fontSize: 10))))
+              .animate()
+              .fade()
+              .slideX(),
           SizedBox(height: 0.015 * width),
           Text('Talk is cheap.',
-              style: GoogleFonts.getFont('Delius',
-                  color: Colors.white, fontSize: 30)),
+                  style: GoogleFonts.getFont('Delius',
+                      color: Colors.white, fontSize: 30))
+              .animate()
+              .fade()
+              .slideX(),
           const SizedBox(height: 5),
           Text('Show me the code.',
-              style: GoogleFonts.getFont('Delius',
-                  color: Colors.white, fontSize: 30)),
+                  style: GoogleFonts.getFont('Delius',
+                      color: Colors.white, fontSize: 30))
+              .animate()
+              .fade()
+              .slideX(),
           const SizedBox(height: 20),
           SizedBox(
             width: isVertical ? double.infinity : width * 0.29,
@@ -49,20 +59,19 @@ class Description extends StatelessWidget {
                     "I'm developing mobile,frontend and backend applications",
                     textAlign: isVertical ? TextAlign.center : TextAlign.start,
                     textStyle: GoogleFonts.getFont('Delius',
-                        color: CustomColors.gray,
-                        fontSize: 15)),
+                        color: CustomColors.gray, fontSize: 15)),
               ],
             ),
-          ),
+          ).animate().fade().slideX(),
           InkWell(
-            onTap: () async => !await launch(
-                'https://mail.google.com/mail/u/0/?fs=1&to=khalidlionel.2089@gmail.com&tf=cm'),
+            onTap: () async => !await launchUrlString(
+                'https://mail.google.com/mail/u/0/?fs=1&to=udesh2568@gmail.com&tf=cm'),
             child: Text("Let's chat",
                 style: GoogleFonts.getFont('Delius',
                     decoration: TextDecoration.underline,
                     color: CustomColors.primary,
                     fontSize: 20)),
-          )
+          ).animate().fade().slideX(),
         ],
       ),
     );

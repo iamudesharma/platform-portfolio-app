@@ -6,9 +6,10 @@ class NavBarItemWithIcon extends StatelessWidget {
   final String text;
   final String icon;
   final String url;
+  final IconData? iconWidget;
 
   const NavBarItemWithIcon(
-      {required this.text, required this.icon, required this.url, Key? key})
+      {required this.text, required this.icon, required this.url, Key? key, this.iconWidget})
       : super(key: key);
 
   @override
@@ -19,9 +20,9 @@ class NavBarItemWithIcon extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(
             CustomColors.brightBackground),
       ),
-      icon: Image.asset(icon),
+      icon: iconWidget!=null?Icon(iconWidget!,):  Image.asset(icon),
       onPressed: () async {
-        await launch(url);
+        await launchUrl(Uri.parse(url));
       },
       label: Text(text, style: const TextStyle(fontSize: 12)),
     );

@@ -34,8 +34,7 @@ class SkillCard extends StatelessWidget {
                 children: [
                   Text(title,
                       style: GoogleFonts.getFont('Delius',
-                          color: CustomColors.primary,
-                          fontSize: 16)),
+                          color: CustomColors.primary, fontSize: 16)),
                   const SizedBox(height: 8),
                   Text("Freelancing",
                       style: GoogleFonts.getFont('Delius',
@@ -43,18 +42,20 @@ class SkillCard extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(description,
                       style: GoogleFonts.getFont('Delius',
-                          color: CustomColors.gray,
-                          fontSize: 12)),
+                          color: CustomColors.gray, fontSize: 12)),
                 ],
               ),
             ),
             width >= Breakpoints.md
                 ? Positioned(
-                    child: Image.asset(icon),
                     top: 20,
                     right: 20,
                     width: 20,
-                    height: 18)
+                    height: 18,
+                    child: Image.asset(
+                      icon,
+                      color: icon.contains('flutter') ? Colors.blue : null,
+                    ))
                 : const SizedBox.shrink()
           ],
         ),

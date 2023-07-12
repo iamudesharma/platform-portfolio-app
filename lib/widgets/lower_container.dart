@@ -47,6 +47,7 @@ class LowerContainer extends StatelessWidget {
                           description:
                               'I’m developing android,ios and web applications using flutter platform.',
                           icon: ImageAssetConstants.flutter,
+                          
                           width: width,
                           ratio: 0.35,
                         ),

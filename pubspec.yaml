@@ -6,22 +6,25 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  animated_text_kit: ^4.2.1
-  cupertino_icons: ^1.0.2
+  animated_text_kit: ^4.2.2
+  cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
+  flutter_animate: ^4.2.0
   flutter_staggered_grid_view: ^0.4.1
-  flutter_svg: ^0.23.0+1
-  get: ^4.6.1
-  google_fonts: ^2.1.0
-  universal_html: ^2.0.8
-  url_launcher: ^6.0.15
+  flutter_svg: ^2.0.7
+  font_awesome_flutter: ^10.5.0
+  get: ^4.6.5
+  google_fonts: ^5.1.0
+  universal_html: ^2.2.3
+  url_launcher: ^6.1.12
+  url_strategy: ^0.2.0
 
 dev_dependencies:
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.2
   flutter_test:
     sdk: flutter
 

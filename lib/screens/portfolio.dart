@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/utils/breakpoints.dart';
 import 'package:portfolio/utils/custom_colors.dart';
@@ -120,9 +121,12 @@ class _PortfolioState extends State<Portfolio> {
                   Container(
                     width: width,
                     height: 0.1,
-                    color:CustomColors.gray,
+                    color: CustomColors.gray,
                   ),
-                  Footer(width: width,scrollController: scrollController,),
+                  Footer(
+                    width: width,
+                    scrollController: scrollController,
+                  ),
                 ],
               ),
               NavBar(
@@ -131,7 +135,7 @@ class _PortfolioState extends State<Portfolio> {
                 intrestsKey: intrestsKey,
                 key: homeKey,
                 scrollController: scrollController,
-              ),
+              ).animate().fade().slide(),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/utils/breakpoints.dart';
 import 'package:portfolio/utils/custom_colors.dart';
@@ -38,7 +39,10 @@ class NavBar extends StatelessWidget {
     Widget navBarRow = Stack(children: [
       Padding(
         padding: EdgeInsets.only(left: width * 0.04),
-        child: Logo(width: width,scrollController: scrollController,),
+        child: Logo(
+          width: width,
+          scrollController: scrollController,
+        ),
       ),
       Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,24 +60,27 @@ class NavBar extends StatelessWidget {
             ),
             const SizedBox(width: 60),
           ]),
-      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-        const SizedBox(width: 50),
-        Row(children: const [
+      const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+        SizedBox(width: 50),
+        Row(children: [
           NavBarItemWithIcon(
             text: 'github',
-            icon: ImageAssetConstants.github,
-            url: 'https://github.com/khalid-alsaleh-dev',
+            icon: "",
+            iconWidget: FontAwesomeIcons.github,
+            url: 'https://github.com/iamudesharma',
           ),
           SizedBox(width: 10),
           NavBarItemWithIcon(
-              text: 'facebook',
-              icon: ImageAssetConstants.facebook,
-              url: 'https://www.facebook.com/khalid.alsaleh.52090/'),
+              text: 'Instagram',
+              icon: "",
+              iconWidget: FontAwesomeIcons.instagram,
+              url: 'https://www.instagram.com/iamudesharma/'),
           SizedBox(width: 10),
           NavBarItemWithIcon(
               text: 'linkedIn',
               icon: ImageAssetConstants.linkedIn,
-              url: 'https://www.linkedin.com/in/khalid-al-saleh-3561881a8/'),
+              iconWidget: FontAwesomeIcons.linkedinIn,
+              url: 'https://www.linkedin.com/in/iamudesharma/'),
           SizedBox(width: 50),
         ])
       ])
@@ -142,7 +149,10 @@ class NavBar extends StatelessWidget {
                   children: [
                     Padding(
                         padding: EdgeInsets.only(left: width * 0.04),
-                        child: Logo(width: width,scrollController: scrollController,)),
+                        child: Logo(
+                          width: width,
+                          scrollController: scrollController,
+                        )),
                     NavBarButton(
                         onPressed: () {
                           if (collapsableHeight.value == 0.0) {

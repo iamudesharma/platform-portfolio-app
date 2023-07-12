@@ -15,11 +15,11 @@ class KhalidImage extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Container(
-          constraints:const BoxConstraints(maxWidth:370),
-          child: Image.asset(
-            ImageAssetConstants.khalid,
-            width: width * 0.29,
-            height: width * 0.3,
+          width: width * 0.29,
+          height: width * 0.3,
+          color: Colors.transparent,
+          constraints: const BoxConstraints(
+            maxWidth: 370,
           ),
         ),
         Positioned(
@@ -34,10 +34,12 @@ class KhalidImage extends StatelessWidget {
         Positioned(
           top: width * 0.19,
           right: width * 0.010,
-          child: Image.asset(
-            ImageAssetConstants.flutterCircle,
-            width: width * 0.083,
-            height: width * 0.08,
+          child: CircleAvatar(
+            backgroundColor: Color(0xff1C1C20),
+            radius: 60,
+            child: FlutterLogo(
+              size: width * 0.06,
+            ),
           ),
         ),
         Positioned(

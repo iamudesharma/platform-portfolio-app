@@ -17,9 +17,19 @@ class Logo extends StatelessWidget {
           curve: Curves.easeInOut),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: Image.asset(ImageAssetConstants.logo,
-            width: width >= Breakpoints.xlg ? width * 0.14 : Breakpoints.xlg * 0.14,
-            height: width >= Breakpoints.xlg ? 0.04 * width : 0.04 * Breakpoints.xlg),
+        child: Container(
+            child: Text(
+              "Udesh Sharma",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white,
+                  ),
+            ),
+            width: width >= Breakpoints.xlg
+                ? width * 0.14
+                : Breakpoints.xlg * 0.14,
+            height: width >= Breakpoints.xlg
+                ? 0.04 * width
+                : 0.04 * Breakpoints.xlg),
       ),
     );
   }
