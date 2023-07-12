@@ -15,15 +15,16 @@ class Info extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('• I’m working with Bookish Santa as a Flutter Developer.',
+          SelectableText(
+              '• I’m working with Bookish Santa as a Flutter Developer.',
               style: GoogleFonts.getFont('Delius',
                   color: CustomColors.gray, fontSize: 13)),
           const SizedBox(height: 20),
-          Text('• The Only thing that makes me feel happy is coding.',
+          SelectableText('• The Only thing that makes me feel happy is coding.',
               style: GoogleFonts.getFont('Delius',
                   color: CustomColors.gray, fontSize: 13)),
           const SizedBox(height: 20),
-          Text(
+          SelectableText(
               '• I always try to discover the new and the best technologies and use them to make my client feel comfortable and satisfied. ',
               style: GoogleFonts.getFont('Delius',
                   color: CustomColors.gray, fontSize: 13)),

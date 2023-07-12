@@ -17,8 +17,8 @@ class Logo extends StatelessWidget {
           curve: Curves.easeInOut),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: Container(
-            child: Text(
+        child: SizedBox(
+            child: SelectableText(
               "Udesh Sharma",
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.white,

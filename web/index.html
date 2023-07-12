@@ -25,16 +25,57 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Udesh-dev">
-    <link rel="apple-touch-icon" href="icons/Icon-192.png" style="color: yellow;">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
     
     
     <!-- Favicon -->
     <link rel="shorcut icon" href="favicon.ico" type"image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon" style="color: yellow;">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <title>udesh-dev</title>
     <link rel="manifest" href="manifest.json">
+
+    <style>
+        .container {
+          width: 100vw;
+          height: 100vh;
+          display: flex; /* Default Axis is X*/
+          justify-content: center; /* Main Axis */
+          align-items: center; /* Cross Axis */
+        }
+        .indicator{
+          width: 50vw;
+        }
+    </style>
 </head>
+
+
+
+<body style="overflow: hidden">
+    <div id="loading_indicator" class="container">
+        <img class="indicator" src="./icons/animation_ljzhll62_small.gif" />
+      </div>
+
+    <script>
+      window.addEventListener('load', function(ev) {
+        var loading = document.querySelector('#loading');
+
+        loading.textContent = "Loading entrypoint...";
+        _flutter.loader.loadEntrypoint({
+          serviceWorker: {
+            serviceWorkerVersion: serviceWorkerVersion,
+          },
+          onEntrypointLoaded: async function(engineInitializer) {
+            loading.textContent = "Initializing engine...";
+            let appRunner = await engineInitializer.initializeEngine();
+
+            loading.textContent = "Running app...";
+            await appRunner.runApp();
+          }
+        });
+      });
+    </script>
+  </body>
 
 <body>
     <!-- This script installs service_worker.js to provide PWA functionality to

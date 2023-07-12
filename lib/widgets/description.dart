@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/utils/custom_colors.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -34,7 +33,7 @@ class Description extends StatelessWidget {
               .fade()
               .slideX(),
           SizedBox(height: 0.015 * width),
-          Text('Talk is cheap.',
+          SelectableText('Talk is cheap.',
                   style: GoogleFonts.getFont('Delius',
                       color: Colors.white, fontSize: 30))
               .animate()

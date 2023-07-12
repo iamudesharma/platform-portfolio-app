@@ -35,13 +35,11 @@ class NavBarItem extends StatelessWidget {
                 const SizedBox(
                   height: 6,
                 ),
-                Text(
+                SelectableText(
                   text,
                   style: TextStyle(
                     fontSize: 12.0,
-                    color: data.value
-                        ? CustomColors.primary
-                        : Colors.white,
+                    color: data.value ? CustomColors.primary : Colors.white,
                   ),
                 ),
                 const SizedBox(

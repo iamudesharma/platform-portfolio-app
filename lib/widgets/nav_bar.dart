@@ -9,6 +9,7 @@ import 'package:portfolio/widgets/nav_bar_button.dart';
 import 'package:portfolio/widgets/nav_bar_item.dart';
 import 'package:portfolio/widgets/nav_bar_item_with_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class NavBar extends StatelessWidget {
   final double width;
@@ -109,16 +110,16 @@ class NavBar extends StatelessWidget {
       NavBarItem(
           text: 'github',
           onTap: () async {
-            await launch('https://github.com/khalid-alsaleh-dev');
+            await launchUrlString('https://github.com/iamudesharma');
           }),
       NavBarItem(
-          text: 'facebook',
+          text: 'Instagram',
           onTap: () async =>
-              await launch('https://www.facebook.com/khalid.alsaleh.52090/')),
+              await launchUrlString('https://www.instagram.com/iamudesharma')),
       NavBarItem(
           text: 'linkedIn',
-          onTap: () async => await launch(
-              'https://www.linkedin.com/in/khalid-al-saleh-3561881a8/')),
+          onTap: () async => await launchUrlString(
+              'https://www.linkedin.com/in/udesh-sharma')),
     ];
     return Stack(
       children: [

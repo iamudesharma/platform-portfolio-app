@@ -9,7 +9,11 @@ class NavBarItemWithIcon extends StatelessWidget {
   final IconData? iconWidget;
 
   const NavBarItemWithIcon(
-      {required this.text, required this.icon, required this.url, Key? key, this.iconWidget})
+      {required this.text,
+      required this.icon,
+      required this.url,
+      Key? key,
+      this.iconWidget})
       : super(key: key);
 
   @override
@@ -17,14 +21,18 @@ class NavBarItemWithIcon extends StatelessWidget {
     return ElevatedButton.icon(
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(0),
-        backgroundColor: MaterialStateProperty.all<Color>(
-            CustomColors.brightBackground),
+        backgroundColor:
+            MaterialStateProperty.all<Color>(CustomColors.brightBackground),
       ),
-      icon: iconWidget!=null?Icon(iconWidget!,):  Image.asset(icon),
+      icon: iconWidget != null
+          ? Icon(
+              iconWidget!,
+            )
+          : Image.asset(icon),
       onPressed: () async {
         await launchUrl(Uri.parse(url));
       },
-      label: Text(text, style: const TextStyle(fontSize: 12)),
+      label: SelectableText(text, style: const TextStyle(fontSize: 12)),
     );
   }
 }

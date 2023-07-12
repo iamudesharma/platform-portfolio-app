@@ -21,7 +21,7 @@ dependencies:
   google_fonts: ^5.1.0
   universal_html: ^2.2.3
   url_launcher: ^6.1.12
-  url_strategy: ^0.2.0
+  # url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.2

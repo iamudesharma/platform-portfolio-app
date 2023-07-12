@@ -47,7 +47,6 @@ class LowerContainer extends StatelessWidget {
                           description:
                               'I’m developing android,ios and web applications using flutter platform.',
                           icon: ImageAssetConstants.flutter,
-                          
                           width: width,
                           ratio: 0.35,
                         ),
@@ -76,13 +75,13 @@ class LowerContainer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         HelloWithBio(
-                          ratio:0.4 ,
+                          ratio: 0.4,
                           width: width,
                         ),
                         const SizedBox(
                           height: 30,
                         ),
-                        Info(width: width,ratio:0.4)
+                        Info(width: width, ratio: 0.4)
                       ],
                     )
                   ],
@@ -127,11 +126,14 @@ class LowerContainer extends StatelessWidget {
                         const SizedBox(
                           height: 30,
                         ),
-                        HelloWithBio(width: 3 * width,ratio: 0.3,),
+                        HelloWithBio(
+                          width: 3 * width,
+                          ratio: 0.3,
+                        ),
                         const SizedBox(
                           height: 35,
                         ),
-                        Info(width: 3 * width,ratio:0.3),
+                        Info(width: 3 * width, ratio: 0.3),
                       ],
                     )
                   ],
@@ -143,8 +145,9 @@ class LowerContainer extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(left:width>=Breakpoints.lg? width * 0.1:width * 0.05),
-              child: Text('Some of my intrests',
+              margin: EdgeInsets.only(
+                  left: width >= Breakpoints.lg ? width * 0.1 : width * 0.05),
+              child: SelectableText('Some of my intrests',
                   style: GoogleFonts.getFont('Delius',
                       color: Colors.white, fontSize: 19)),
             ),
@@ -217,8 +220,7 @@ class LowerContainer extends StatelessWidget {
                 );
               }
             }),
-            const SizedBox(height:10)
-        
+            const SizedBox(height: 10)
           ],
         ));
   }
