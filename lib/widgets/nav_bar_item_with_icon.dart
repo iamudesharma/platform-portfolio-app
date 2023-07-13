@@ -21,12 +21,12 @@ class NavBarItemWithIcon extends StatelessWidget {
     return ElevatedButton.icon(
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(0),
-        backgroundColor:
-            MaterialStateProperty.all<Color>(CustomColors.brightBackground),
+        backgroundColor: MaterialStateProperty.all<Color>(CustomColors.primary),
       ),
       icon: iconWidget != null
           ? Icon(
               iconWidget!,
+              color: Colors.black,
             )
           : Image.asset(icon),
       onPressed: () async {

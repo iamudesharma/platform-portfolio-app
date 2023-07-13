@@ -51,6 +51,7 @@ class Description extends StatelessWidget {
             width: isVertical ? double.infinity : width * 0.29,
             height: 90,
             child: AnimatedTextKit(
+              displayFullTextOnTap: true,
               repeatForever: true,
               pause: const Duration(seconds: 2),
               animatedTexts: [

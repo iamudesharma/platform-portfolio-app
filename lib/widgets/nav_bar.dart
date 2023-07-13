@@ -1,6 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
 import 'package:portfolio/utils/breakpoints.dart';
 import 'package:portfolio/utils/custom_colors.dart';
 import 'package:portfolio/utils/image_asset_constants.dart';
@@ -8,20 +12,20 @@ import 'package:portfolio/widgets/logo.dart';
 import 'package:portfolio/widgets/nav_bar_button.dart';
 import 'package:portfolio/widgets/nav_bar_item.dart';
 import 'package:portfolio/widgets/nav_bar_item_with_icon.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class NavBar extends StatelessWidget {
   final double width;
   final GlobalKey intrestsKey;
   final GlobalKey skillsKey;
   final ScrollController scrollController;
+  final GlobalKey projectsKey;
   late final RxDouble collapsableHeight;
   NavBar(
       {required this.width,
       required this.intrestsKey,
       required this.skillsKey,
       required this.scrollController,
+      required this.projectsKey,
       Key? key})
       : super(key: key) {
     collapsableHeight = 0.0.obs;
@@ -51,7 +55,17 @@ class NavBar extends StatelessWidget {
           children: [
             NavBarItem(
               text: 'Home',
-              onTap: () {},
+              onTap: () {
+                scrollController.animateTo(0,
+                    duration: const Duration(milliseconds: 700),
+                    curve: Curves.easeInOut);
+              },
+            ),
+            NavBarItem(
+              onTap: () {
+                scrollToWidgetByKey(projectsKey);
+              },
+              text: "Projects",
             ),
             NavBarItem(
                 text: 'Skills', onTap: () => scrollToWidgetByKey(skillsKey)),
@@ -93,6 +107,13 @@ class NavBar extends StatelessWidget {
             collapsableHeight.value = 0.0;
           }),
       const SizedBox(width: 10),
+      NavBarItem(
+          text: 'Projects',
+          onTap: () {
+            scrollToWidgetByKey(projectsKey);
+
+            collapsableHeight.value = 0.0;
+          }),
       NavBarItem(
           text: 'Skills',
           onTap: () {
@@ -170,4 +191,15 @@ class NavBar extends StatelessWidget {
       ],
     );
   }
+}
+
+class ProjectModel {
+  final String title;
+  final String? description;
+  final List<String> image;
+  ProjectModel({
+    required this.title,
+    this.description,
+    required this.image,
+  });
 }

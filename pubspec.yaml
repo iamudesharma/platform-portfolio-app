@@ -22,6 +22,8 @@ dependencies:
   universal_html: ^2.2.3
   url_launcher: ^6.1.12
   # url_strategy: ^0.2.0
+  carousel_slider: ^4.2.1
+  web_smooth_scroll: ^1.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.2
@@ -32,15 +34,17 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/logo.png
-    - assets/images/github.png
-    - assets/images/facebook.png
-    - assets/images/linkedIn.png
-    - assets/images/flutter.png
-    - assets/images/java.png
-    - assets/images/python.png
-    - assets/images/khalid.png
-    - assets/images/flutter_circle.png
-    - assets/images/java_circle.png
-    - assets/images/python_circle.png
-    - assets/images/backend_icon.png
+    - assets/images/
+    # - assets/images/github.png
+    # - assets/images/facebook.png
+    # - assets/images/linkedIn.png
+    # - assets/images/flutter.png
+    # - assets/images/java.png
+    # - assets/images/python.png
+    # - assets/images/khalid.png
+    # - assets/images/flutter_circle.png
+    # - assets/images/java_circle.png
+    # - assets/images/python_circle.png
+    # - assets/images/backend_icon.png
+    # - assets/images/mypaylist1.png
+    # - assets/images/mypaylist2.png

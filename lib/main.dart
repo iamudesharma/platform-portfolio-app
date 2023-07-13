@@ -14,11 +14,14 @@ void main() async {
   ));
   runApp(MaterialApp(
     theme: ThemeData(
+        // primarySwatch: Colors.amber,
         primaryColor: CustomColors.primary,
         splashColor: CustomColors.primary,
         highlightColor: CustomColors.primary,
         useMaterial3: true),
     title: 'Udesh-dev',
+    // showPerformanceOverlay: true,
+
     home: const Portfolio(),
     debugShowCheckedModeBanner: false,
   ));

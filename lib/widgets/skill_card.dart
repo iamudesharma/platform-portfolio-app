@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/utils/breakpoints.dart';
 import 'package:portfolio/utils/custom_colors.dart';
@@ -36,9 +37,9 @@ class SkillCard extends StatelessWidget {
                       style: GoogleFonts.getFont('Delius',
                           color: CustomColors.primary, fontSize: 16)),
                   const SizedBox(height: 8),
-                  SelectableText("Freelancing",
-                      style: GoogleFonts.getFont('Delius',
-                          color: Colors.white, fontSize: 15)),
+                  // SelectableText("Freelancing",
+                  //     style: GoogleFonts.getFont('Delius',
+                  //         color: Colors.white, fontSize: 15)),
                   const SizedBox(height: 10),
                   SelectableText(description,
                       style: GoogleFonts.getFont('Delius',
@@ -59,7 +60,7 @@ class SkillCard extends StatelessWidget {
                 : const SizedBox.shrink()
           ],
         ),
-      ),
+      ).animate().slideX(),
     );
   }
 }

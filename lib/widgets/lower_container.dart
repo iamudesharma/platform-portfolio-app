@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/utils/breakpoints.dart';
@@ -8,6 +9,8 @@ import 'package:portfolio/widgets/hello_with_bio.dart';
 import 'package:portfolio/widgets/info.dart';
 import 'package:portfolio/widgets/intrest.dart';
 import 'package:portfolio/widgets/skill_card.dart';
+
+import '../assets.dart';
 
 class LowerContainer extends StatelessWidget {
   final double width;
@@ -54,17 +57,17 @@ class LowerContainer extends StatelessWidget {
                         SkillCard(
                           title: 'Backend Development',
                           description:
-                              'I’m developing backend applications using codnuit and spring boot with a good knowledge in nodejs.',
-                          icon: ImageAssetConstants.backendIcon,
+                              'I’m developing backend applications using codnuit and spring boot with a good knowledge in nodejs and dart with serverpod',
+                          icon: Assets.images.nodejsPNG,
                           width: width,
                           ratio: 0.35,
                         ),
                         const SizedBox(height: 10),
                         SkillCard(
-                            title: 'Python Development',
+                            title: 'Aws Firebase Cloud',
                             description:
-                                'I’m developing maching learing and deep learning projects using standard python libraries and tensorflow api.',
-                            icon: ImageAssetConstants.python,
+                                'I’m Working Aws and Firebase to competed  database and hosting.',
+                            icon: Assets.images.awsPNG,
                             width: width,
                             ratio: 0.35),
                       ],
@@ -85,7 +88,7 @@ class LowerContainer extends StatelessWidget {
                       ],
                     )
                   ],
-                );
+                ).animate().fade();
               } else {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
