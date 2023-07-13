@@ -24,6 +24,8 @@ dependencies:
   # url_strategy: ^0.2.0
   carousel_slider: ^4.2.1
   web_smooth_scroll: ^1.1.0
+  flutter_improved_scrolling: ^0.0.3
+  glowstone: ^0.0.2
 
 dev_dependencies:
   flutter_lints: ^2.0.2

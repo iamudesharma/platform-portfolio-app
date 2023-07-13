@@ -2,7 +2,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_improved_scrolling/flutter_improved_scrolling.dart';
 import 'package:get/get.dart';
+import 'package:glowstone/glowstone.dart';
+import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 
 import 'package:portfolio/assets.dart';
 import 'package:portfolio/utils/breakpoints.dart';
@@ -11,7 +14,6 @@ import 'package:portfolio/widgets/footer.dart';
 import 'package:portfolio/widgets/lower_container.dart';
 import 'package:portfolio/widgets/nav_bar.dart';
 import 'package:portfolio/widgets/upper_container.dart';
-import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 
 class Portfolio extends StatefulWidget {
   const Portfolio({Key? key}) : super(key: key);
@@ -91,6 +93,8 @@ class _PortfolioState extends State<Portfolio> {
     super.initState();
   }
 
+  Offset position = Offset.zero;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -113,55 +117,141 @@ class _PortfolioState extends State<Portfolio> {
       body: Container(
         color: CustomColors.brightBackground,
         width: width,
-        child: Scrollbar(
-          controller: scrollController,
-          child: WebSmoothScroll(
+        child: ImprovedScrolling(
+          scrollController: scrollController,
+          onScroll: (scrollOffset) => debugPrint(
+            'Scroll offset: $scrollOffset',
+          ),
+          onMMBScrollStateChanged: (scrolling) => debugPrint(
+            'Is scrolling: $scrolling',
+          ),
+          onMMBScrollCursorPositionUpdate:
+              (localCursorOffset, scrollActivity) => debugPrint(
+            'Cursor position: $localCursorOffset\n'
+            'Scroll activity: $scrollActivity',
+          ),
+          enableMMBScrolling: true,
+          enableKeyboardScrolling: true,
+          enableCustomMouseWheelScrolling: true,
+          mmbScrollConfig: const MMBScrollConfig(
+              // customScrollCursor:
+              //     useSystemCursor ? null : const DefaultCustomScrollCursor(),
+              ),
+          keyboardScrollConfig: KeyboardScrollConfig(
+            arrowsScrollAmount: 250.0,
+            homeScrollDurationBuilder: (currentScrollOffset, minScrollOffset) {
+              return const Duration(milliseconds: 100);
+            },
+            endScrollDurationBuilder: (currentScrollOffset, maxScrollOffset) {
+              return const Duration(milliseconds: 2000);
+            },
+          ),
+          customMouseWheelScrollConfig: const CustomMouseWheelScrollConfig(
+            scrollAmountMultiplier: 2.0,
+          ),
+          child: Scrollbar(
             controller: scrollController,
-            child: SingleChildScrollView(
-              controller: scrollController,
-              child: Stack(
-                children: [
-                  Column(
+            child: ScrollConfiguration(
+              behavior: const CustomScrollBehaviour(),
+              child: WebSmoothScroll(
+                controller: scrollController,
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Stack(
                     children: [
-                      const SizedBox(height: 130),
-                      UpperContainer(width: width),
-                      LowerContainer(
-                          width: width,
-                          intrests: intrests,
-                          intrestsKey: intrestsKey,
-                          skillsKey: skillsKey),
-                      const Align(
-                        alignment: Alignment.center,
-                        child: SelectableText('Projects',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: CustomColors.primary,
-                            )),
+                      Column(
+                        children: [
+                          const SizedBox(height: 130),
+                          MouseRegion(
+                              cursor: position != Offset.zero
+                                  ? SystemMouseCursors.none
+                                  : SystemMouseCursors.precise,
+                              onExit: (event) {
+                                setState(() {
+                                  position = Offset.zero;
+                                });
+                              },
+                              onEnter: (event) {
+                                setState(() {
+                                  position = event.localPosition;
+                                });
+                              },
+                              onHover: (event) {
+                                setState(() {
+                                  position = event.localPosition;
+                                });
+                              },
+                              child: Stack(
+                                children: [
+                                  UpperContainer(width: width),
+                                  if (position != Offset.zero)
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      child: Positioned(
+                                        left: position.dx,
+                                        top: position.dy,
+                                        child: Glowstone(
+                                          radius: 10,
+                                          velocity: 2,
+                                          child: Container(
+                                            height: 50,
+                                            width: 50,
+                                            decoration: BoxDecoration(
+                                                color: Colors.yellowAccent
+                                                    .withOpacity(0.9),
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    width: 4,
+                                                    color: Colors.white,
+                                                    style: BorderStyle.solid)),
+                                          ),
+                                        ),
+                                      ).animate().fade().scale(),
+                                    ),
+                                ],
+                              )),
+                          LowerContainer(
+                              scrollController: scrollController,
+                              width: width,
+                              intrests: intrests,
+                              intrestsKey: intrestsKey,
+                              skillsKey: skillsKey),
+                          const Align(
+                            alignment: Alignment.center,
+                            child: SelectableText('Projects',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: CustomColors.primary,
+                                )),
+                          ),
+                          ProjectListWidget(
+                            scrollController: scrollController,
+                            projectsKey: projectsKey,
+                          ),
+                          Container(
+                            width: width,
+                            height: 0.1,
+                            color: CustomColors.gray,
+                          ),
+                          Footer(
+                            width: width,
+                            scrollController: scrollController,
+                          ),
+                        ],
                       ),
-                      ProjectListWidget(
+                      NavBar(
+                        width: width,
                         projectsKey: projectsKey,
-                      ),
-                      Container(
-                        width: width,
-                        height: 0.1,
-                        color: CustomColors.gray,
-                      ),
-                      Footer(
-                        width: width,
+                        skillsKey: skillsKey,
+                        intrestsKey: intrestsKey,
+                        key: homeKey,
                         scrollController: scrollController,
-                      ),
+                      ).animate().fade().slide(),
                     ],
                   ),
-                  NavBar(
-                    width: width,
-                    projectsKey: projectsKey,
-                    skillsKey: skillsKey,
-                    intrestsKey: intrestsKey,
-                    key: homeKey,
-                    scrollController: scrollController,
-                  ).animate().fade().slide(),
-                ],
+                ),
               ),
             ),
           ),
@@ -200,8 +290,10 @@ class ProjectListWidget extends StatefulWidget {
   const ProjectListWidget({
     Key? key,
     required this.projectsKey,
+    required this.scrollController,
   }) : super(key: key);
   final GlobalKey<State<StatefulWidget>> projectsKey;
+  final ScrollController scrollController;
 
   @override
   State<ProjectListWidget> createState() => _ProjectListWidgetState();
@@ -219,6 +311,7 @@ class _ProjectListWidgetState extends State<ProjectListWidget> {
           vertical: 20,
         ),
         child: CarouselSlider(
+            // disableGesture: true,
             items: List.generate(
                 projectList.length,
                 (index) => ProjectCard(
@@ -230,16 +323,22 @@ class _ProjectListWidgetState extends State<ProjectListWidget> {
               aspectRatio: 16 / 9,
               viewportFraction: 0.6,
               initialPage: 0,
+              pauseAutoPlayOnTouch: true,
               enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
+              reverse: true,
+
+              // autoPlay: true,
               autoPlayInterval: const Duration(seconds: 10),
               autoPlayAnimationDuration: const Duration(seconds: 10),
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               enlargeFactor: 0.3,
+              pageSnapping: true,
               onPageChanged: (index, reason) {},
               scrollDirection: Axis.horizontal,
+              onScrolled: (value) {
+                // print(value);
+              },
             )),
       ),
     );
@@ -339,5 +438,40 @@ class _ProjectCardState extends State<ProjectCard> {
         ],
       ),
     );
+  }
+}
+
+class CustomScrollBehaviour extends MaterialScrollBehavior {
+  const CustomScrollBehaviour();
+
+  @override
+  Widget buildScrollbar(
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.linux:
+      case TargetPlatform.macOS:
+        return Scrollbar(
+          controller: details.controller,
+          thumbVisibility: true,
+          child: child,
+        );
+      case TargetPlatform.windows:
+        return Scrollbar(
+          controller: details.controller,
+          thumbVisibility: true,
+          radius: Radius.zero,
+          thickness: 16.0,
+          hoverThickness: 16.0,
+          showTrackOnHover: true,
+          child: child,
+        );
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.iOS:
+        return child;
+    }
   }
 }

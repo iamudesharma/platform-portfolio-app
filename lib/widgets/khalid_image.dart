@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:portfolio/utils/custom_colors.dart';
 import 'package:portfolio/utils/image_asset_constants.dart';
 
@@ -32,7 +33,7 @@ class KhalidImage extends StatelessWidget {
             width: width * 0.07,
             height: width * 0.07,
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.19,
           right: width * 0.010,
@@ -47,7 +48,7 @@ class KhalidImage extends StatelessWidget {
               Assets.images.awsPNG,
               width: width * 0.06,
               height: width * 0.058,
-            )),
+            )).animate().scale(),
         // Positioned(
         //     top: width * 0.19,
         //     right: width * 0.10,
@@ -70,7 +71,7 @@ class KhalidImage extends StatelessWidget {
             width: width * 0.06,
             height: width * 0.058,
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.08,
           left: 10,
@@ -80,7 +81,7 @@ class KhalidImage extends StatelessWidget {
             width: width * 0.06,
             height: width * 0.058,
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.10,
           right: width * 0.09,
@@ -89,7 +90,7 @@ class KhalidImage extends StatelessWidget {
             width: width * 0.06,
             height: width * 0.058,
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.06,
           right: width * 0.016,
@@ -98,7 +99,7 @@ class KhalidImage extends StatelessWidget {
             width: width * 0.06,
             height: width * 0.058,
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.04,
           left: width * 0.025,
@@ -109,7 +110,7 @@ class KhalidImage extends StatelessWidget {
                 color: CustomColors.primary,
                 borderRadius: BorderRadius.all(Radius.circular(50))),
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.19,
           right: 1,
@@ -120,7 +121,7 @@ class KhalidImage extends StatelessWidget {
                 color: CustomColors.purple,
                 borderRadius: BorderRadius.all(Radius.circular(50))),
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.28,
           left: width * 0.03,
@@ -131,7 +132,7 @@ class KhalidImage extends StatelessWidget {
                 color: CustomColors.secondary,
                 borderRadius: BorderRadius.all(Radius.circular(50))),
           ),
-        ),
+        ).animate().scale(),
         Positioned(
           top: width * 0.01,
           right: 1,

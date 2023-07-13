@@ -6,15 +6,15 @@ import 'package:portfolio/widgets/khalid_image.dart';
 
 class UpperContainer extends StatelessWidget {
   final double width;
-  const UpperContainer({required this.width, Key? key})
-      : super(key: key);
+  const UpperContainer({required this.width, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
+      height: width > 650 ? MediaQuery.of(context).size.height * 0.8 : null,
       color: CustomColors.brightBackground,
-      padding: const EdgeInsets.only(bottom:20),
+      padding: const EdgeInsets.only(bottom: 20),
       child: LayoutBuilder(builder: (context, consraints) {
         if (consraints.maxWidth >= Breakpoints.lg) {
           return Row(
@@ -31,7 +31,8 @@ class UpperContainer extends StatelessWidget {
               )
             ],
           );
-        } else if (consraints.maxWidth < Breakpoints.lg && consraints.maxWidth >= Breakpoints.md) {
+        } else if (consraints.maxWidth < Breakpoints.lg &&
+            consraints.maxWidth >= Breakpoints.md) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
