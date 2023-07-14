@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -30,6 +32,8 @@ class _PortfolioState extends State<Portfolio> {
   late final GlobalKey homeKey;
   late final ScrollController scrollController;
   late final RxBool showFloatingButton;
+
+  Path path = Path();
 
   @override
   void initState() {
@@ -93,8 +97,7 @@ class _PortfolioState extends State<Portfolio> {
     super.initState();
   }
 
-  Offset position = Offset.zero;
-
+  ValueNotifier<Offset> position = ValueNotifier<Offset>(Offset(10, 30));
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -161,54 +164,71 @@ class _PortfolioState extends State<Portfolio> {
                     children: [
                       Column(
                         children: [
-                          const SizedBox(height: 130),
                           MouseRegion(
-                              cursor: position != Offset.zero
-                                  ? SystemMouseCursors.none
-                                  : SystemMouseCursors.precise,
+                              // cursor: position != Offset.zero
+                              //     ? SystemMouseCursors.click
+                              //     : SystemMouseCursors.precise,
                               onExit: (event) {
-                                setState(() {
-                                  position = Offset.zero;
-                                });
+                                position.value = event.localPosition;
                               },
                               onEnter: (event) {
-                                setState(() {
-                                  position = event.localPosition;
-                                });
+                                position.value = event.localPosition;
                               },
                               onHover: (event) {
-                                setState(() {
-                                  position = event.localPosition;
-                                });
+                                position.value = event.localPosition;
+
+                                print(position.value);
                               },
                               child: Stack(
                                 children: [
-                                  UpperContainer(width: width),
-                                  if (position != Offset.zero)
-                                    AnimatedContainer(
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      child: Positioned(
-                                        left: position.dx,
-                                        top: position.dy,
-                                        child: Glowstone(
-                                          radius: 10,
-                                          velocity: 2,
-                                          child: Container(
-                                            height: 50,
-                                            width: 50,
-                                            decoration: BoxDecoration(
-                                                color: Colors.yellowAccent
-                                                    .withOpacity(0.9),
+                                  Column(
+                                    children: [
+                                      NavBar(
+                                        width: width,
+                                        projectsKey: projectsKey,
+                                        skillsKey: skillsKey,
+                                        intrestsKey: intrestsKey,
+                                        key: homeKey,
+                                        scrollController: scrollController,
+                                      ).animate().fade().slide(),
+                                      UpperContainer(width: width),
+                                    ],
+                                  ),
+                                  // if (position.value.dx != 10 &&
+                                  //     position.value.dy != 30)
+                                  ValueListenableBuilder(
+                                      valueListenable: position,
+                                      builder: (context, offset, child) {
+                                        return AnimatedContainer(
+                                          curve: Curves.bounceInOut,
+                                          duration:
+                                              const Duration(milliseconds: 200),
+                                          child: Positioned(
+                                            left: offset.dx,
+                                            top: offset.dy,
+                                            child: Container(
+                                              height: 70,
+                                              width: 70,
+                                              decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    width: 4,
-                                                    color: Colors.white,
-                                                    style: BorderStyle.solid)),
-                                          ),
-                                        ),
-                                      ).animate().fade().scale(),
-                                    ),
+                                                color: Colors.white
+                                                    .withOpacity(0.2),
+                                              ),
+                                            ),
+                                          )
+                                              .animate(
+                                                  autoPlay: true,
+                                                  adapter: ValueAdapter(
+                                                    animated: true,
+                                                    position.value.distance,
+                                                  ))
+                                              .move()
+                                              .followPath(
+                                                  rotate: true,
+                                                  path: Path.from(
+                                                      path.shift(offset))),
+                                        );
+                                      }),
                                 ],
                               )),
                           LowerContainer(
@@ -241,14 +261,6 @@ class _PortfolioState extends State<Portfolio> {
                           ),
                         ],
                       ),
-                      NavBar(
-                        width: width,
-                        projectsKey: projectsKey,
-                        skillsKey: skillsKey,
-                        intrestsKey: intrestsKey,
-                        key: homeKey,
-                        scrollController: scrollController,
-                      ).animate().fade().slide(),
                     ],
                   ),
                 ),
@@ -360,25 +372,21 @@ class ProjectCard extends StatefulWidget {
 }
 
 class _ProjectCardState extends State<ProjectCard> {
-  bool isHovering = false;
+  // bool isHovering = false;
+
+  ValueNotifier<bool> isHovering = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (event) {
-        setState(() {
-          isHovering = true;
-        });
+        isHovering.value = true;
       },
       onExit: (event) {
-        setState(() {
-          isHovering = false;
-        });
+        isHovering.value = false;
       },
       onHover: (event) {
-        setState(() {
-          isHovering = true;
-        });
+        isHovering.value = true;
       },
       child: Stack(
         children: [
@@ -418,23 +426,30 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
             ),
           ).animate().fade(),
-          if (isHovering)
-            Container(
-              height: 400,
-              width: 600,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.black.withOpacity(0.7),
-              ),
-              child: Center(
-                child: Text(widget.title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                    )),
-              ),
-            ).animate().fade().flip(),
+          ValueListenableBuilder(
+              valueListenable: isHovering,
+              builder: (BuildContext context, bool value, Widget? child) {
+                if (isHovering.value) {
+                  return Container(
+                    height: 400,
+                    width: 600,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+                    child: Center(
+                      child: Text(widget.title,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                          )),
+                    ),
+                  ).animate().fade().flip();
+                } else {
+                  return const SizedBox.shrink();
+                }
+              }),
         ],
       ),
     );

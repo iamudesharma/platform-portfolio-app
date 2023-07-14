@@ -19,30 +19,28 @@ class Description extends StatelessWidget {
         crossAxisAlignment:
             isVertical ? CrossAxisAlignment.center : CrossAxisAlignment.start,
         children: [
-          Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  width: 135,
-                  height: 40,
-                  alignment: Alignment.center,
-                  color: CustomColors.primary,
-                  child: Center(
-                      child: Text('Software Developer',
-                          style: GoogleFonts.getFont('Days One',
-                              color: Colors.black, fontSize: 10))))
-              .animate()
-              .fade()
-              .slideX(),
+          FilledButton(
+              onPressed: () {},
+              // margin: const EdgeInsets.symmetric(horizontal: 10),
+              // width: 135,
+              // height: 40,
+              // alignment: Alignment.center,
+              // color: CustomColors.primary,
+              child: const Center(
+                  child: Text(
+                'Software Developer',
+              ))).animate().fade().slideX(),
           SizedBox(height: 0.015 * width),
           SelectableText('Talk is cheap.',
                   style: GoogleFonts.getFont('Delius',
-                      color: Colors.white, fontSize: 30))
+                      color: Colors.white, fontSize: 35))
               .animate()
               .fade()
               .slideX(),
           const SizedBox(height: 5),
           Text('Show me the code.',
                   style: GoogleFonts.getFont('Delius',
-                      color: Colors.white, fontSize: 30))
+                      color: Colors.white, fontSize: 32))
               .animate()
               .fade()
               .slideX(),

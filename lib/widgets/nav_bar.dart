@@ -45,7 +45,7 @@ class NavBar extends StatelessWidget {
       Padding(
         padding: EdgeInsets.only(left: width * 0.04),
         child: Logo(
-          width: width,
+          width: width - 100,
           scrollController: scrollController,
         ),
       ),
@@ -76,7 +76,7 @@ class NavBar extends StatelessWidget {
             const SizedBox(width: 60),
           ]),
       const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-        SizedBox(width: 50),
+        // SizedBox(width: 50),
         Row(children: [
           NavBarItemWithIcon(
             text: 'github',
@@ -96,7 +96,7 @@ class NavBar extends StatelessWidget {
               icon: ImageAssetConstants.linkedIn,
               iconWidget: FontAwesomeIcons.linkedinIn,
               url: 'https://www.linkedin.com/in/iamudesharma/'),
-          SizedBox(width: 50),
+          SizedBox(width: 20),
         ])
       ])
     ]);

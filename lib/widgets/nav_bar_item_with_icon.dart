@@ -20,19 +20,22 @@ class NavBarItemWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all<double>(0),
-        backgroundColor: MaterialStateProperty.all<Color>(CustomColors.primary),
+        overlayColor: MaterialStatePropertyAll<Color>(Colors.white),
+        elevation: MaterialStateProperty.all<double>(10),
+        backgroundColor: MaterialStateProperty.all<Color>(CustomColors.gray),
       ),
       icon: iconWidget != null
           ? Icon(
               iconWidget!,
-              color: Colors.black,
+              color: CustomColors.primary,
+              size: 25,
             )
           : Image.asset(icon),
       onPressed: () async {
         await launchUrl(Uri.parse(url));
       },
-      label: SelectableText(text, style: const TextStyle(fontSize: 12)),
+      label: SelectableText(text,
+          style: const TextStyle(fontSize: 14, color: CustomColors.primary)),
     );
   }
 }
