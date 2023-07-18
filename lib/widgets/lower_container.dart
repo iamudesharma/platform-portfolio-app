@@ -201,83 +201,83 @@ class LowerContainer extends StatelessWidget {
             SizedBox(
               height: width * 0.07,
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(
-                  left: width >= Breakpoints.lg ? width * 0.1 : width * 0.05),
-              child: SelectableText('Some of my intrests',
-                  style: GoogleFonts.getFont('Delius',
-                      color: Colors.white, fontSize: 19)),
-            ),
-            SizedBox(height: width * 0.03),
-            // 820
-            LayoutBuilder(builder: (context, constraints) {
-              if (constraints.maxWidth >= Breakpoints.lg) {
-                return SizedBox(
-                  width: width * 0.76,
-                  height: 100,
-                  child: StaggeredGridView.countBuilder(
-                    crossAxisCount: 8,
-                    itemCount: 8,
-                    itemBuilder: (BuildContext context, int index) => Intrest(
-                      intrest: intrests[index]['intrest'],
-                      color: intrests[index]['color'],
-                      textColor: intrests[index]['textColor'],
-                      key: index == 4 ? intrestsKey : null,
-                    ),
-                    staggeredTileBuilder: (int index) =>
-                        const StaggeredTile.fit(
-                      2,
-                    ),
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 40.0,
-                  ),
-                );
-              } else if (constraints.maxWidth < Breakpoints.lg &&
-                  constraints.maxWidth >= Breakpoints.sm) {
-                return SizedBox(
-                  width: width * 0.76,
-                  height: 180,
-                  child: StaggeredGridView.countBuilder(
-                    crossAxisCount: 8,
-                    itemCount: 8,
-                    itemBuilder: (BuildContext context, int index) => Intrest(
-                      intrest: intrests[index]['intrest'],
-                      color: intrests[index]['color'],
-                      textColor: intrests[index]['textColor'],
-                      key: index == 4 ? intrestsKey : null,
-                    ),
-                    staggeredTileBuilder: (int index) =>
-                        const StaggeredTile.fit(
-                      4,
-                    ),
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 40.0,
-                  ),
-                );
-              } else {
-                return SizedBox(
-                  width: width * 0.76,
-                  height: 360,
-                  child: StaggeredGridView.countBuilder(
-                    crossAxisCount: 8,
-                    itemCount: 8,
-                    itemBuilder: (BuildContext context, int index) => Intrest(
-                      intrest: intrests[index]['intrest'],
-                      color: intrests[index]['color'],
-                      textColor: intrests[index]['textColor'],
-                      key: index == 4 ? intrestsKey : null,
-                    ),
-                    staggeredTileBuilder: (int index) =>
-                        const StaggeredTile.fit(
-                      8,
-                    ),
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 40.0,
-                  ),
-                );
-              }
-            }),
+            // Container(
+            //   alignment: Alignment.centerLeft,
+            //   margin: EdgeInsets.only(
+            //       left: width >= Breakpoints.lg ? width * 0.1 : width * 0.05),
+            //   child: SelectableText('Some of my intrests',
+            //       style: GoogleFonts.getFont('Delius',
+            //           color: Colors.white, fontSize: 19)),
+            // ),
+            // SizedBox(height: width * 0.03),
+            // // 820
+            // LayoutBuilder(builder: (context, constraints) {
+            //   if (constraints.maxWidth >= Breakpoints.lg) {
+            //     return SizedBox(
+            //       width: width * 0.76,
+            //       height: 100,
+            //       child: StaggeredGridView.countBuilder(
+            //         crossAxisCount: 8,
+            //         itemCount: 8,
+            //         itemBuilder: (BuildContext context, int index) => Intrest(
+            //           intrest: intrests[index]['intrest'],
+            //           color: intrests[index]['color'],
+            //           textColor: intrests[index]['textColor'],
+            //           key: index == 4 ? intrestsKey : null,
+            //         ),
+            //         staggeredTileBuilder: (int index) =>
+            //             const StaggeredTile.fit(
+            //           2,
+            //         ),
+            //         mainAxisSpacing: 10.0,
+            //         crossAxisSpacing: 40.0,
+            //       ),
+            //     );
+            //   } else if (constraints.maxWidth < Breakpoints.lg &&
+            //       constraints.maxWidth >= Breakpoints.sm) {
+            //     return SizedBox(
+            //       width: width * 0.76,
+            //       height: 180,
+            //       child: StaggeredGridView.countBuilder(
+            //         crossAxisCount: 8,
+            //         itemCount: 8,
+            //         itemBuilder: (BuildContext context, int index) => Intrest(
+            //           intrest: intrests[index]['intrest'],
+            //           color: intrests[index]['color'],
+            //           textColor: intrests[index]['textColor'],
+            //           key: index == 4 ? intrestsKey : null,
+            //         ),
+            //         staggeredTileBuilder: (int index) =>
+            //             const StaggeredTile.fit(
+            //           4,
+            //         ),
+            //         mainAxisSpacing: 10.0,
+            //         crossAxisSpacing: 40.0,
+            //       ),
+            //     );
+            //   } else {
+            //     return SizedBox(
+            //       width: width * 0.76,
+            //       height: 360,
+            //       child: StaggeredGridView.countBuilder(
+            //         crossAxisCount: 8,
+            //         itemCount: 8,
+            //         itemBuilder: (BuildContext context, int index) => Intrest(
+            //           intrest: intrests[index]['intrest'],
+            //           color: intrests[index]['color'],
+            //           textColor: intrests[index]['textColor'],
+            //           key: index == 4 ? intrestsKey : null,
+            //         ),
+            //         staggeredTileBuilder: (int index) =>
+            //             const StaggeredTile.fit(
+            //           8,
+            //         ),
+            //         mainAxisSpacing: 10.0,
+            //         crossAxisSpacing: 40.0,
+            //       ),
+            //     );
+            //   }
+            // }),
             const SizedBox(height: 10)
           ],
         ));

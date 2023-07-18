@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:portfolio/utils/custom_colors.dart';
-import 'package:portfolio/utils/image_asset_constants.dart';
 
 import '../assets.dart';
 
@@ -140,8 +139,11 @@ class KhalidImage extends StatelessWidget {
             width: width * 0.012,
             height: width * 0.012,
             decoration: const BoxDecoration(
-                color: CustomColors.darkBackground,
-                borderRadius: BorderRadius.all(Radius.circular(50))),
+              color: CustomColors.darkBackground,
+              borderRadius: BorderRadius.all(
+                Radius.circular(50),
+              ),
+            ),
           ),
         )
       ],

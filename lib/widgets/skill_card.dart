@@ -35,14 +35,14 @@ class SkillCard extends StatelessWidget {
                 children: [
                   SelectableText(title,
                       style: GoogleFonts.getFont('Delius',
-                          color: CustomColors.primary, fontSize: 16)),
+                          color: CustomColors.purple, fontSize: 16)),
                   const SizedBox(height: 8),
                   // SelectableText("Freelancing",
                   //     style: GoogleFonts.getFont('Delius',
                   //         color: Colors.white, fontSize: 15)),
                   const SizedBox(height: 10),
                   SelectableText(description,
-                      style: GoogleFonts.getFont('Delius',
+                      style: GoogleFonts.aBeeZee(
                           color: CustomColors.gray, fontSize: 12)),
                 ],
               ),

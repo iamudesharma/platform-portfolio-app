@@ -18,7 +18,7 @@ void main() async {
     theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
         // primarySwatch: Colors.amber,
-        primaryColor: CustomColors.primary,
+        primaryColor: Colors.purpleAccent,
         splashColor: CustomColors.primary,
         highlightColor: CustomColors.primary,
         useMaterial3: true),

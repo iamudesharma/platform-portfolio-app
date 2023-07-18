@@ -207,9 +207,13 @@ class _PortfolioState extends State<Portfolio> {
                                             left: offset.dx,
                                             top: offset.dy,
                                             child: Container(
-                                              height: 70,
-                                              width: 70,
+                                              height: 50,
+                                              width: 50,
                                               decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.white
+                                                        .withOpacity(0.1),
+                                                    width: 10),
                                                 shape: BoxShape.circle,
                                                 color: Colors.white
                                                     .withOpacity(0.2),
@@ -224,9 +228,15 @@ class _PortfolioState extends State<Portfolio> {
                                                   ))
                                               .move()
                                               .followPath(
-                                                  rotate: true,
-                                                  path: Path.from(
-                                                      path.shift(offset))),
+                                                rotate: true,
+                                                path: Path.from(
+                                                  path.shift(offset),
+                                                ),
+                                              )
+                                              .elevation(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                              ),
                                         );
                                       }),
                                 ],
@@ -479,8 +489,6 @@ class CustomScrollBehaviour extends MaterialScrollBehavior {
           thumbVisibility: true,
           radius: Radius.zero,
           thickness: 16.0,
-          hoverThickness: 16.0,
-          showTrackOnHover: true,
           child: child,
         );
       case TargetPlatform.android:
