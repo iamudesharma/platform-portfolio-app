@@ -7,6 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_improved_scrolling/flutter_improved_scrolling.dart';
 import 'package:get/get.dart';
 import 'package:glowstone/glowstone.dart';
+import 'package:portfolio/spider_controller.dart';
 import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 
 import 'package:portfolio/assets.dart';
@@ -164,83 +165,98 @@ class _PortfolioState extends State<Portfolio> {
                     children: [
                       Column(
                         children: [
-                          MouseRegion(
-                              // cursor: position != Offset.zero
-                              //     ? SystemMouseCursors.click
-                              //     : SystemMouseCursors.precise,
-                              onExit: (event) {
-                                position.value = event.localPosition;
-                              },
-                              onEnter: (event) {
-                                position.value = event.localPosition;
-                              },
-                              onHover: (event) {
-                                position.value = event.localPosition;
+                          SpiderMouse(
+                            child: Column(
+                              children: [
+                                NavBar(
+                                  width: width,
+                                  projectsKey: projectsKey,
+                                  skillsKey: skillsKey,
+                                  intrestsKey: intrestsKey,
+                                  key: homeKey,
+                                  scrollController: scrollController,
+                                ).animate().fade().slide(),
+                                UpperContainer(width: width),
+                              ],
+                            ),
+                          ),
+                          // MouseRegion(
+                          //     // cursor: position != Offset.zero
+                          //     //     ? SystemMouseCursors.click
+                          //     //     : SystemMouseCursors.precise,
+                          //     onExit: (event) {
+                          //       position.value = event.localPosition;
+                          //     },cp
+                          //     onEnter: (event) {
+                          //       position.value = event.localPosition;
+                          //     },
+                          //     onHover: (event) {
+                          //       position.value = event.localPosition;
 
-                                print(position.value);
-                              },
-                              child: Stack(
-                                children: [
-                                  Column(
-                                    children: [
-                                      NavBar(
-                                        width: width,
-                                        projectsKey: projectsKey,
-                                        skillsKey: skillsKey,
-                                        intrestsKey: intrestsKey,
-                                        key: homeKey,
-                                        scrollController: scrollController,
-                                      ).animate().fade().slide(),
-                                      UpperContainer(width: width),
-                                    ],
-                                  ),
-                                  // if (position.value.dx != 10 &&
-                                  //     position.value.dy != 30)
-                                  ValueListenableBuilder(
-                                      valueListenable: position,
-                                      builder: (context, offset, child) {
-                                        return AnimatedContainer(
-                                          curve: Curves.bounceInOut,
-                                          duration:
-                                              const Duration(milliseconds: 200),
-                                          child: Positioned(
-                                            left: offset.dx,
-                                            top: offset.dy,
-                                            child: Container(
-                                              height: 50,
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.white
-                                                        .withOpacity(0.1),
-                                                    width: 10),
-                                                shape: BoxShape.circle,
-                                                color: Colors.white
-                                                    .withOpacity(0.2),
-                                              ),
-                                            ),
-                                          )
-                                              .animate(
-                                                  autoPlay: true,
-                                                  adapter: ValueAdapter(
-                                                    animated: true,
-                                                    position.value.distance,
-                                                  ))
-                                              .move()
-                                              .followPath(
-                                                rotate: true,
-                                                path: Path.from(
-                                                  path.shift(offset),
-                                                ),
-                                              )
-                                              .elevation(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                              ),
-                                        );
-                                      }),
-                                ],
-                              )),
+                          //       print(position.value);
+                          //     },
+                          //     child: Stack(
+                          //       children: [
+                          //         Column(
+                          //           children: [
+                          //             NavBar(
+                          //               width: width,
+                          //               projectsKey: projectsKey,
+                          //               skillsKey: skillsKey,
+                          //               intrestsKey: intrestsKey,
+                          //               key: homeKey,
+                          //               scrollController: scrollController,
+                          //             ).animate().fade().slide(),
+                          //             UpperContainer(width: width),
+                          //           ],
+                          //         ),
+                          //         // if (position.value.dx != 10 &&
+                          //         //     position.value.dy != 30)
+                          //         ValueListenableBuilder(
+                          //             valueListenable: position,
+                          //             builder: (context, offset, child) {
+                          //               return AnimatedContainer(
+                          //                 curve: Curves.bounceInOut,
+                          //                 duration:
+                          //                     const Duration(milliseconds: 200),
+                          //                 child: Positioned(
+                          //                   left: offset.dx,
+                          //                   top: offset.dy,
+                          //                   child: Container(
+                          //                     height: 50,
+                          //                     width: 50,
+                          //                     decoration: BoxDecoration(
+                          //                       border: Border.all(
+                          //                           color: Colors.white
+                          //                               .withOpacity(0.1),
+                          //                           width: 10),
+                          //                       shape: BoxShape.circle,
+                          //                       color: Colors.white
+                          //                           .withOpacity(0.2),
+                          //                     ),
+                          //                   ),
+                          //                 )
+                          //                     .animate(
+                          //                         autoPlay: true,
+                          //                         adapter: ValueAdapter(
+                          //                           animated: true,
+                          //                           position.value.distance,
+                          //                         ))
+                          //                     .move()
+                          //                     .followPath(
+                          //                       rotate: true,
+                          //                       path: Path.from(
+                          //                         path.shift(offset),
+                          //                       ),
+                          //                     )
+                          //                     .elevation(
+                          //                       borderRadius:
+                          //                           BorderRadius.circular(50),
+                          //                     ),
+                          //               );
+                          //             }),
+                          //       ],
+                          //     )),
                           LowerContainer(
                               scrollController: scrollController,
                               width: width,
