@@ -1,3 +1,7 @@
 {
-  "dart.flutterSdkPath": "/Users/udeshsharma/fvm/versions/master"
+  "dart.flutterSdkPaths": [
+    "/Users/udeshsharma/fvm/versions/stable",
+    "/Users/udeshsharma/fvm/versions/3.19.6"
+  ],
+  "dart.flutterSdkPath": "~/fvm/versions/stable"
 }

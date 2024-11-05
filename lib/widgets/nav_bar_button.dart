@@ -6,23 +6,20 @@ class NavBarButton extends StatelessWidget {
   final Function onPressed;
   final double width;
 
-  const NavBarButton({required this.width, required this.onPressed, Key? key})
-      : super(key: key);
+  const NavBarButton({required this.width, required this.onPressed, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () => onPressed(),
-      child: const Icon(Icons.menu, color: Colors.white),
       style: ElevatedButton.styleFrom(
         elevation: 4.0,
         shape: const CircleBorder(),
-        padding: EdgeInsets.all(width >= Breakpoints.md? 0.03 * width : 0.03 * 762),
-        primary:
-            CustomColors.darkBackground, // <-- Button color
-        onPrimary:
-            CustomColors.brightBackground, // <-- Splash color
+        padding: EdgeInsets.all(width >= Breakpoints.md ? 0.03 * width : 0.03 * 762),
+        backgroundColor: CustomColors.darkBackground, // <-- Button color
+        foregroundColor: CustomColors.brightBackground, // <-- Splash color
       ),
+      child: const Icon(Icons.menu, color: Colors.white),
     );
   }
 }

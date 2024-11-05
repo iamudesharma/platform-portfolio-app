@@ -35,8 +35,7 @@ class NavBar extends StatelessWidget {
     RenderBox box = key.currentContext?.findRenderObject() as RenderBox;
     Offset position = box.localToGlobal(Offset.zero); //this is global position
     double y = position.dy;
-    scrollController.animateTo(y,
-        duration: const Duration(milliseconds: 700), curve: Curves.easeInOut);
+    scrollController.animateTo(y, duration: const Duration(milliseconds: 700), curve: Curves.easeInOut);
   }
 
   @override
@@ -49,32 +48,26 @@ class NavBar extends StatelessWidget {
           scrollController: scrollController,
         ),
       ),
-      Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            NavBarItem(
-              text: 'Home',
-              onTap: () {
-                scrollController.animateTo(0,
-                    duration: const Duration(milliseconds: 700),
-                    curve: Curves.easeInOut);
-              },
-            ),
-            NavBarItem(
-              onTap: () {
-                scrollToWidgetByKey(projectsKey);
-              },
-              text: "Projects",
-            ),
-            NavBarItem(
-                text: 'Skills', onTap: () => scrollToWidgetByKey(skillsKey)),
-            NavBarItem(
-              text: 'Intrests',
-              onTap: () => scrollToWidgetByKey(intrestsKey),
-            ),
-            const SizedBox(width: 60),
-          ]),
+      Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+        NavBarItem(
+          text: 'Home',
+          onTap: () {
+            scrollController.animateTo(0, duration: const Duration(milliseconds: 700), curve: Curves.easeInOut);
+          },
+        ),
+        NavBarItem(
+          onTap: () {
+            scrollToWidgetByKey(projectsKey);
+          },
+          text: "Projects",
+        ),
+        NavBarItem(text: 'Skills', onTap: () => scrollToWidgetByKey(skillsKey)),
+        NavBarItem(
+          text: 'Intrests',
+          onTap: () => scrollToWidgetByKey(intrestsKey),
+        ),
+        const SizedBox(width: 60),
+      ]),
       const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
         // SizedBox(width: 50),
         Row(children: [
@@ -89,7 +82,7 @@ class NavBar extends StatelessWidget {
               text: 'Instagram',
               icon: "",
               iconWidget: FontAwesomeIcons.instagram,
-              url: 'https://www.instagram.com/iamudesharma/'),
+              url: 'https://www.instagram.com/ia/'),
           SizedBox(width: 10),
           NavBarItemWithIcon(
               text: 'linkedIn',
@@ -133,14 +126,9 @@ class NavBar extends StatelessWidget {
           onTap: () async {
             await launchUrlString('https://github.com/iamudesharma');
           }),
+      NavBarItem(text: 'Instagram', onTap: () async => await launchUrlString('https://www.instagram.com/iamudesharma')),
       NavBarItem(
-          text: 'Instagram',
-          onTap: () async =>
-              await launchUrlString('https://www.instagram.com/iamudesharma')),
-      NavBarItem(
-          text: 'linkedIn',
-          onTap: () async => await launchUrlString(
-              'https://www.linkedin.com/in/udesh-sharma')),
+          text: 'linkedIn', onTap: () async => await launchUrlString('https://www.linkedin.com/in/udesh-sharma')),
     ];
     return Stack(
       children: [
